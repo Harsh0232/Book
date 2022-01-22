@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+}
+
+@model IEnumerable<Book>
+<br />
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-primary">Cart</h2>
+    </div>
+</div>
+<div class="p-4 border rounded">
+    <h1>@ViewBag.Empty</h1>
+    @if (ViewBag.cart != null)
+    {
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    Title
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Total value
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in ViewBag.cart)
+            {
+                <tr>
+                    <td>
+                        @item.Book.Title
+                    </td>
+                    <td>
+                        @item.Book.Price
+                    </td>
+                    <td>@item.Quantity</td>
+
+                    <td>@(item.Book.Price * item.Quantity)</td>
+                    <td>
+                        <div class="text-center">
+
+                            <a asp-action="remove" asp-route-id="@item.Book.BookId">Remove</a>
+
+                        </div>
+                    </td>
+                </tr>
+
+            }
+
+        </table>
+        <table>
+            <tr class="table-dark float-right">
+                <td>
+                    Sum:
+                </td>
+                <td>
+                    @ViewBag.total
+                </td>
+
+            </tr>
+            <a asp-action="Checkout" class="btn btn-info float-right" style="cursor:pointer">
+               Checkout
+            </a>
+        </table>
+       
+    }
+
+
+</div>

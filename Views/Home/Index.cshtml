@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<Book>
+<br />
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-primary">Book List</h2>
+    </div>
+</div>
+<div class="p-4 border rounded">
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    Title
+                </th>
+                <th>
+                    Publication
+                </th>
+                <th>
+                    Launched
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Title
+                    </td>
+                    <td>
+                        @item.Publication
+                    </td>
+                    <td>
+                        @item.Launched
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <form asp-action="Delete" asp-route-userId="@item.BookId">
+                                <a id="" asp-action="onGetBuy" asp-route-id="@item.BookId" class="btn btn-info addtoCart" style="cursor:pointer">
+                                    Add to cart
+                                </a>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
